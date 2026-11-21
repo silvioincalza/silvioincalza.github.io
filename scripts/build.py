@@ -219,6 +219,7 @@ class Site:
 <p><a href="{e(cs['url'])}">{e(cs['url'])}</a> · <a href="https://github.com/{c['source_repo']}">source on GitHub</a></p>
 <div class="grid two">{approach}</div>
 <p class="stack"><strong>Stack.</strong> {e(cs['stack'])}</p>
+<p class="stack"><strong>Method.</strong> {e(cs['method']['text'])} <a href="{e(cs['method']['link']['url'])}">{e(cs['method']['link']['label'])}</a>.</p>
 <h3>Architecture</h3>
 <div class="figures">{diagrams}</div>
 </div></section>
