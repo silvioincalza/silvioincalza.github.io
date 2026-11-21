@@ -232,7 +232,7 @@ class Site:
 </section>
 <section class="wrap" id="experience" aria-labelledby="exp-h"><h2 id="exp-h">Experience</h2><ol class="timeline">{experience}</ol></section>
 <section class="wrap" id="contact" aria-labelledby="contact-h"><h2 id="contact-h">Contact</h2>
-<p>I am open to senior engineering and architecture roles in Switzerland.</p><ul class="contact">{contact}</ul></section>"""
+<ul class="contact">{contact}</ul></section>"""
         self.write("index.html", self.page(f"{p['name']} · {p['role']}", p["headline"], body, 0, ""))
 
     def build_static(self) -> None:

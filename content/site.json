@@ -17,7 +17,7 @@
     ],
     "links": {
       "github": "https://github.com/silvioincalza",
-      "linkedin": "",
+      "linkedin": "https://www.linkedin.com/in/silvioincalza/",
       "email": ""
     }
   },
@@ -78,11 +78,6 @@
     }
   ],
   "experience": [
-    {
-      "company": "UBS",
-      "role": "Software Engineer, Associate Director",
-      "text": "Scalable microservices and integrations for mission-critical digital banking platforms. Feature ownership from architecture to production, production support, mentoring and pair programming."
-    },
     {
       "company": "OCS",
       "role": "Solution Architect and Domain Owner",
