@@ -1,0 +1,266 @@
+{
+  "base_url": "https://silvioincalza.github.io",
+  "source_repo": "silvioincalza/helper2.ai",
+  "source_branch": "main",
+  "diagrams_not_copied": [
+    "architecture-platform.svg"
+  ],
+  "person": {
+    "name": "Silvio Incalza",
+    "role": "Senior Software Engineer and Software Architect",
+    "location": "Switzerland",
+    "headline": "I design and build backend systems that stay simple, testable and honest about what they know.",
+    "about": [
+      "I have built enterprise software since 2008, most of it in banking and fintech: payments, fraud prevention, strong customer authentication, digital onboarding and Open Banking.",
+      "I work with Java and Spring Boot, Domain-Driven Design, hexagonal architecture and test-driven development. I care about software craftsmanship: small cohesive units, clear names, good tests, and the simplest design that has no obvious future trap.",
+      "helper2.ai is my own product. I designed, built and run it alone, from the domain model to the Kubernetes deploy. Every lasting decision is written down as an architecture decision record. This site shows a selection of them."
+    ],
+    "links": {
+      "github": "https://github.com/silvioincalza",
+      "linkedin": "",
+      "email": ""
+    }
+  },
+  "skills": [
+    {
+      "area": "Backend",
+      "items": [
+        "Java 25, Kotlin",
+        "Spring Boot 4, Spring AI, Spring Modulith",
+        "REST, contract-first OpenAPI",
+        "JMS with IBM MQ and ActiveMQ"
+      ]
+    },
+    {
+      "area": "Architecture",
+      "items": [
+        "Domain-Driven Design",
+        "Hexagonal architecture, modular monolith",
+        "Microservices and integration patterns",
+        "Architecture decision records"
+      ]
+    },
+    {
+      "area": "Quality",
+      "items": [
+        "TDD and BDD",
+        "Integration tests for adapters",
+        "Offline evaluation of search and AI answers",
+        "Code review and mentoring"
+      ]
+    },
+    {
+      "area": "Platform",
+      "items": [
+        "Kubernetes, Helm",
+        "Azure, Terraform, Ansible",
+        "GitLab CI/CD, GitHub Actions",
+        "Supply chain: SBOM, image signing"
+      ]
+    },
+    {
+      "area": "AI systems",
+      "items": [
+        "Retrieval first, model second",
+        "Evidence gates on model output",
+        "Cost guards and caching",
+        "EU AI Act Art. 50 marking"
+      ]
+    },
+    {
+      "area": "Domains",
+      "items": [
+        "Payments and fraud",
+        "Strong customer authentication",
+        "Digital onboarding and lending",
+        "Open Banking"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "UBS",
+      "role": "Software Engineer, Associate Director",
+      "text": "Scalable microservices and integrations for mission-critical digital banking platforms. Feature ownership from architecture to production, production support, mentoring and pair programming."
+    },
+    {
+      "company": "OCS",
+      "role": "Solution Architect and Domain Owner",
+      "text": "Architecture of prospect and customer onboarding for a next-generation smart lending platform. Technical lead of five engineers: DDD, hexagonal architecture, server-driven UI, BFF, Spring Boot, Kubernetes."
+    },
+    {
+      "company": "Cornèr Bank, Avaloq, lastminute.com, Auriga",
+      "role": "Software Engineer",
+      "text": "Payments, fraud prevention, authentication, digital onboarding and Open Banking."
+    }
+  ],
+  "case_study": {
+    "name": "helper2.ai",
+    "url": "https://helper2.ai",
+    "tagline": "A metasearch engine for the AI world, with one page and one box.",
+    "problem": "New AI models, tools, agents, MCP servers and papers appear every day. General search engines mix them with marketing pages and old content, so it is hard to know what is real and current.",
+    "approach": [
+      {
+        "title": "Retrieval first, the model second, a validator last",
+        "text": "The model never decides what is true. The AI guide may only pick results that search really found, and code checks its quote word for word against the source."
+      },
+      {
+        "title": "Honest about what it does not know",
+        "text": "Every source shows what happened to it on every search. A date, a licence or a price that no source states is shown as not stated, never filled in."
+      },
+      {
+        "title": "It degrades, it does not break",
+        "text": "Search keeps working with the cache down, the model down or a source down. Cost guards and caches keep the model spend bounded."
+      },
+      {
+        "title": "Decisions are written down",
+        "text": "One modular monolith, hexagonal where the rules live, contract-first REST, and one architecture decision record per decision, each with a flowchart and a sequence diagram."
+      }
+    ],
+    "stack": "Spring Boot 4, Spring AI 2, Spring Modulith, Java 25 and Kotlin. React 19 and Vite. PostgreSQL 18 with full-text search and pgvector. Redis 8. NVIDIA Nemotron models. Kubernetes and Helm, servers in the EU."
+  },
+  "diagrams": [
+    {
+      "file": "architecture-system-context.svg",
+      "title": "System context",
+      "text": "Who uses helper2.ai and which outside systems it talks to."
+    },
+    {
+      "file": "architecture-containers.svg",
+      "title": "Containers",
+      "text": "The web image, the public app, the back office app and their data stores."
+    },
+    {
+      "file": "hexagonal-architecture.svg",
+      "title": "Hexagonal architecture",
+      "text": "Ports and adapters around the modules that hold the rules."
+    },
+    {
+      "file": "context-map.svg",
+      "title": "Context map",
+      "text": "The bounded contexts and how they depend on each other."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "0002",
+      "group": "Architecture",
+      "diagram": "flow-0002-modular-monolith-libraries-and-apps.svg",
+      "problem": "Several features share one database, but the rules (ranking, merging, the evidence gate) must stay testable without Spring, a database or a model.",
+      "decision": "One modular monolith: four libraries and two apps, public and back office. Hexagonal ports and adapters only where the rules live.",
+      "why": "No network calls and no extra deploys without a scaling need. The rules are unit-tested in isolation."
+    },
+    {
+      "id": "0003",
+      "group": "Architecture",
+      "diagram": "flow-0003-contract-first-rest-api.svg",
+      "problem": "Backend and frontend change in the same pull request, and hand-written types on both sides drift apart quietly.",
+      "decision": "OpenAPI 3.1 is the source of truth. Controller interfaces and DTOs are generated before every compile, and the build stops when two contract files disagree.",
+      "why": "The honesty rules of the API (every date can be unknown, every source has a status) live in one place both sides read."
+    },
+    {
+      "id": "0051",
+      "group": "Architecture",
+      "diagram": "flow-0051-use-cases-return-outcomes.svg",
+      "problem": "A use case that throws HTTP exceptions mixes business rules with the web, and its rollback depends on which exception was thrown.",
+      "decision": "Each use case returns a sealed Outcome with one record per result. Records carry data, never a sentence or a status. The web layer maps them to HTTP.",
+      "why": "Callers that are not controllers get business answers, and the compiler checks that every result is handled."
+    },
+    {
+      "id": "0006",
+      "group": "Reliability",
+      "diagram": "flow-0006-resilience-policies.svg",
+      "problem": "Every search calls up to six public APIs in parallel. Any of them, the model provider or Redis can be slow, rate-limited or down.",
+      "decision": "One HTTP client and one set of resilience policies for every outbound call. Failures reach the search as a small set of known outcomes.",
+      "why": "One slow source never holds up a search, a rate limit leads to a pause, and the source status panel can say what happened."
+    },
+    {
+      "id": "0022",
+      "group": "Search",
+      "diagram": "flow-0022-federated-search.svg",
+      "problem": "Each source has its own speed, rate limit and failure modes, and two sources can describe the same resource differently.",
+      "decision": "Federated search: every query fans out in parallel to the public sources and the own catalog, each under its own deadline, then results are merged.",
+      "why": "Users see which sources answered and why the others did not. The set of sources is disclosed."
+    },
+    {
+      "id": "0021",
+      "group": "Search",
+      "diagram": "flow-0021-resource-identity.svg",
+      "problem": "The same thing arrives as a GitHub repository, an npm package, a PyPI project and a line in an awesome list.",
+      "decision": "The id is a UUID v5 of a canonical URL, with host rules for GitHub, arXiv and others. Packages of a repository join that repository.",
+      "why": "One result for one thing, one catalog row every source adds to, and ids that keep their meaning in bookmarks and reviews."
+    },
+    {
+      "id": "0024",
+      "group": "Search",
+      "diagram": "flow-0024-vector-search-pgvector.svg",
+      "problem": "Keyword search misses a resource when the user describes a need in other words than the resource uses.",
+      "decision": "Vector search with pgvector inside PostgreSQL. Every catalog resource has an embedding, kept current when its text changes.",
+      "why": "Search by meaning without a new database. When the embedding API fails, only the results by meaning disappear."
+    },
+    {
+      "id": "0025",
+      "group": "Search",
+      "diagram": "flow-0025-ranking.svg",
+      "problem": "Each source ranks its own hits, and text density alone is not relevance.",
+      "decision": "Reciprocal-rank fusion of the sources' own orders, with fixed boosts and a bounded popularity term.",
+      "why": "One order that is repeatable and easy to explain. Ranking values change only when the evaluation measures an improvement."
+    },
+    {
+      "id": "0008",
+      "group": "AI",
+      "diagram": "flow-0008-llm-integration.svg",
+      "problem": "Model calls cost money and seconds, providers fail, and the answer is untrusted text that may follow instructions planted in third-party data.",
+      "decision": "One model integration through Spring AI, with a hard daily spend ceiling, and model output treated as untrusted input.",
+      "why": "The application still works without a model: search runs and the guide shows the top real results."
+    },
+    {
+      "id": "0031",
+      "group": "AI",
+      "diagram": "flow-0031-ai-guide-evidence-gate.svg",
+      "problem": "A model that answers from memory invents tools, links and licences. A ranked list does not say why a result fits.",
+      "decision": "Plan with a fast model, retrieve real candidates, choose with a reasoning model, then a code gate checks each quote word for word and a second call checks each reason.",
+      "why": "Every pick on the page is a real result with a checked quote. User text and third-party text are data inside tags, never instructions."
+    },
+    {
+      "id": "0014",
+      "group": "AI",
+      "diagram": "flow-0014-evidence-gated-enrichment.svg",
+      "problem": "A model can extract licence, pricing and platforms from source text, but it can also invent them or copy planted instructions.",
+      "decision": "Every fact needs a quote that states it, checked by code. Without one the field stays not stated, and unclear cases go to human review.",
+      "why": "Richer search and resource pages with no hallucinated facts. Code, not the model, decides where extra text is fetched from."
+    },
+    {
+      "id": "0032",
+      "group": "AI",
+      "diagram": "flow-0032-guide-cost-guard.svg",
+      "problem": "The site is public and free. One client could spend the whole day's model budget, and the same question asked in many spellings costs again each time.",
+      "decision": "Per-client quotas, a global daily cap, a limit on questions at a time, and an answer cache whose key ignores spelling-only differences.",
+      "why": "The model spend has a ceiling, and the guards degrade the answer instead of breaking the page."
+    },
+    {
+      "id": "0033",
+      "group": "Compliance",
+      "diagram": "flow-0033-ai-content-marking.svg",
+      "problem": "EU AI Act Art. 50 asks that people know they deal with AI, and that AI-written text is marked in a machine-readable way.",
+      "decision": "Every AI-written text is labelled in the UI and marked in the API and in the HTML, with a research trail behind each answer.",
+      "why": "Compliance built into the contract and the page, not added later."
+    },
+    {
+      "id": "0046",
+      "group": "Quality",
+      "diagram": "flow-0046-search-evaluation-harness.svg",
+      "problem": "Prompt, model and ranking changes move quality in ways a unit test cannot see, and live sources return a different list every week.",
+      "decision": "A fixed, public question set for the guide and recorded snapshots for search, run the same way each time.",
+      "why": "Changes are accepted or rejected by measurement, and a quality drop is seen the next day."
+    },
+    {
+      "id": "0044",
+      "group": "Delivery",
+      "diagram": "flow-0044-supply-chain.svg",
+      "problem": "The repository is public, the images ship hundreds of libraries, and the cluster must run only images that CD built.",
+      "decision": "CI on pull requests, staging on main, prod on a release after approval. An SBOM per image, a scan that stops a fixable Critical, signed images deployed by digest.",
+      "why": "Every change reaches staging with no manual step, and prod runs only reviewed, released and signed versions."
+    }
+  ]
+}
