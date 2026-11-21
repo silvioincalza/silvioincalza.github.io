@@ -8,7 +8,7 @@ the flowchart, then the full record as it is in that repository.
 
 ## How it works
 
-- `content/site.json` holds everything I write by hand: profile, skills, experience, the case study, the chosen
+- `content/site.json` holds everything I write by hand: profile, skills, the case study, the chosen
   diagrams and the chosen decisions with their summaries.
 - `scripts/build.py` reads `site.json` and the helper2.ai docs and writes a static site to `_site/`. No JavaScript,
   no cookies, no external fonts.

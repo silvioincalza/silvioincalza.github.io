@@ -77,18 +77,6 @@
       ]
     }
   ],
-  "experience": [
-    {
-      "company": "OCS",
-      "role": "Solution Architect and Domain Owner",
-      "text": "Architecture of prospect and customer onboarding for a next-generation smart lending platform. Technical lead of five engineers: DDD, hexagonal architecture, server-driven UI, BFF, Spring Boot, Kubernetes."
-    },
-    {
-      "company": "Cornèr Bank, Avaloq, lastminute.com, Auriga",
-      "role": "Software Engineer",
-      "text": "Payments, fraud prevention, authentication, digital onboarding and Open Banking."
-    }
-  ],
   "case_study": {
     "name": "helper2.ai",
     "url": "https://helper2.ai",

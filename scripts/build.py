@@ -124,7 +124,7 @@ class Site:
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap">
 <a class="brand" href="{up}index.html"><span class="tile" aria-hidden="true">SI</span>{html.escape(p['name'])}</a>
-<nav aria-label="Main"><a href="{up}index.html#work">helper2.ai</a><a href="{up}index.html#decisions">Decisions</a><a href="{up}index.html#experience">Experience</a><a href="{up}index.html#contact">Contact</a></nav>
+<nav aria-label="Main"><a href="{up}index.html#work">helper2.ai</a><a href="{up}index.html#decisions">Decisions</a><a href="{up}index.html#contact">Contact</a></nav>
 </div></header>
 <main id="main">
 {body}
@@ -199,8 +199,6 @@ class Site:
                           f'<span class="num">ADR {e(d["id"])}</span><h4>{e(name)}</h4>'
                           f'<p>{e(d["decision"])}</p></a>')
             decisions += f'<h3 class="group">{e(group)}</h3><div class="grid">{cards}</div>'
-        experience = "".join(f'<li><h3>{e(x["company"])}</h3><p class="role">{e(x["role"])}</p><p>{e(x["text"])}</p></li>'
-                             for x in c["experience"])
         links = [("GitHub", p["links"]["github"]), ("LinkedIn", p["links"]["linkedin"])]
         if p["links"]["email"]:
             links.append(("Email", "mailto:" + p["links"]["email"]))
@@ -230,7 +228,6 @@ class Site:
 {decisions}
 <p><a href="{self.blob}/{DECISIONS_DIR}/README.md">All {total} records on GitHub</a></p>
 </section>
-<section class="wrap" id="experience" aria-labelledby="exp-h"><h2 id="exp-h">Experience</h2><ol class="timeline">{experience}</ol></section>
 <section class="wrap" id="contact" aria-labelledby="contact-h"><h2 id="contact-h">Contact</h2>
 <ul class="contact">{contact}</ul></section>"""
         self.write("index.html", self.page(f"{p['name']} · {p['role']}", p["headline"], body, 0, ""))
