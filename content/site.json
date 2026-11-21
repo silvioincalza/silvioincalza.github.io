@@ -13,7 +13,7 @@
     "about": [
       "I have built enterprise software since 2008, most of it in banking and fintech: payments, fraud prevention, strong customer authentication, digital onboarding and Open Banking.",
       "I work with Java and Spring Boot, Domain-Driven Design, hexagonal architecture and test-driven development. I care about software craftsmanship: small cohesive units, clear names, good tests, and the simplest design that has no obvious future trap.",
-      "helper2.ai is my own product. I designed, built and run it alone, from the domain model to the Kubernetes deploy. Every lasting decision is written down as an architecture decision record. This site shows a selection of them."
+      "helper2.ai is my own product and I run it alone. I did the architecture and the software design, from the domain model to the Kubernetes deploy, and wrote about 30% of the code. AI agents wrote the rest, under my review. Every lasting decision is written down as an architecture decision record. This site shows a selection of them."
     ],
     "links": {
       "github": "https://github.com/silvioincalza",
@@ -96,11 +96,22 @@
         "text": "Search keeps working with the cache down, the model down or a source down. Cost guards and caches keep the model spend bounded."
       },
       {
+        "title": "My design, AI-assisted code, human in the loop",
+        "text": "I own the architecture and the software design. The work follows the AI Unified Process and an AI-native SDLC: use cases drive the backlog, AI agents write most of the code, and I review and merge every change."
+      },
+      {
         "title": "Decisions are written down",
         "text": "One modular monolith, hexagonal where the rules live, contract-first REST, and one architecture decision record per decision, each with a flowchart and a sequence diagram."
       }
     ],
-    "stack": "Spring Boot 4, Spring AI 2, Spring Modulith, Java 25 and Kotlin. React 19 and Vite. PostgreSQL 18 with full-text search and pgvector. Redis 8. NVIDIA Nemotron models. Kubernetes and Helm, servers in the EU."
+    "stack": "Spring Boot 4, Spring AI 2, Spring Modulith, Java 25 and Kotlin. React 19 and Vite. PostgreSQL 18 with full-text search and pgvector. Redis 8. NVIDIA Nemotron models. Kubernetes and Helm, servers in the EU.",
+    "method": {
+      "text": "Specified and built with the AI Unified Process (AIUP) and an AI-native software development life cycle (SDLC). I did the architecture and the software design, and I wrote about 30% of the code myself. AI agents wrote the rest, each change in a pull request that I reviewed and merged. Vision, requirements, use cases and the entity model come first, and every backlog story links to its use case. Specialist AI agents (architect, security, privacy, UX, reviewer) work on each step, and I approve each use case.",
+      "link": {
+        "label": "About AIUP",
+        "url": "https://unifiedprocess.ai"
+      }
+    }
   },
   "diagrams": [
     {
